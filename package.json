@@ -1,0 +1,57 @@
+{
+    "name": "remix-template-fly",
+    "private": true,
+    "description": "",
+    "license": "",
+    "sideEffects": false,
+    "scripts": {
+        "build": "remix build",
+        "deploy": "fly deploy --remote-only",
+        "dev": "remix dev",
+        "prettier:check": "npx prettier --check .",
+        "prettier:fix": "npx prettier --write .",
+        "lint": "npx eslint .",
+        "start": "remix-serve build",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@remix-run/node": "^1.5.1",
+        "@remix-run/react": "^1.5.1",
+        "@remix-run/serve": "^1.5.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^17.0.0",
+        "@commitlint/config-conventional": "^17.0.0",
+        "@remix-run/dev": "^1.5.1",
+        "@remix-run/eslint-config": "^1.5.1",
+        "@types/react": "^17.0.45",
+        "@types/react-dom": "^17.0.17",
+        "@typescript-eslint/eslint-plugin": "^5.25.0",
+        "@typescript-eslint/parser": "^5.25.0",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.16.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-react": "^7.30.0",
+        "husky": "^8.0.0",
+        "lint-staged": "^12.4.1",
+        "prettier": "^2.6.2",
+        "typescript": "^4.6.4"
+    },
+    "lint-staged": {
+        "*.{css,less,scss,html,json,jsx,js}": [
+            "prettier --write ."
+        ],
+        "*.js": "eslint --fix"
+    },
+    "engines": {
+        "node": ">=14"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}
