@@ -6,8 +6,7 @@
     "extends": [
         "@remix-run/eslint-config",
         "@remix-run/eslint-config/node",
-        "airbnb",
-        "airbnb-typescript",
+        "eslint:recommended",
         "plugin:import/typescript",
         "plugin:prettier/recommended"
     ],
@@ -31,6 +30,7 @@
         "react/jsx-uses-react": ["off"],
         "react/react-in-jsx-scope": ["off"],
         "react/jsx-props-no-spreading": ["warn"],
-        "no-shadow": ["off"]
+        "no-shadow": ["off"],
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
     }
 }
