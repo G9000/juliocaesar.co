@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -32,36 +32,21 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                     {!isMobile ? (
                         <>
                             <ul className="text-white flex gap-x-8 text-xl font-semibold">
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                <Link to="/" className={NavLinkStyle}>
                                     Home
-                                </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                </Link>
+                                <Link to="/" className={NavLinkStyle}>
                                     Blogs
-                                </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                </Link>
+                                <Link to="/" className={NavLinkStyle}>
                                     Library
-                                </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                </Link>
+                                <Link to="/" className={NavLinkStyle}>
                                     Weekend Project
-                                </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                </Link>
+                                <Link to="/" className={NavLinkStyle}>
                                     About
-                                </button>
+                                </Link>
                             </ul>
                             <div className="flex gap-x-4 items-center">
                                 <button
