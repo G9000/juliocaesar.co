@@ -30,6 +30,9 @@
         "react/jsx-uses-react": ["off"],
         "react/react-in-jsx-scope": ["off"],
         "no-shadow": ["off"],
-        "prettier/prettier": ["error", { "endOfLine": "auto" }]
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "no-unused-vars": "warn",
+        "jsx-a11y/media-has-caption": "off",
+        "jsx-a11y/alt-text": "off" // still long way to go to detect that I have alt text
     }
 }

@@ -8,6 +8,10 @@ import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { getBlogs } from "~/utils/blogs";
 import type { Blog } from "~/utils/blogs";
+import type { TransformerOption } from "@cld-apis/types";
+import type { ImageBuilder } from "../ImageBuilder";
+import { getImgProps, getImageBuilder } from "../ImageBuilder";
+import clsx from "clsx";
 
 export const loader: LoaderFunction = async () => {
     return getBlogs();
@@ -359,14 +363,45 @@ const HeroSectionBg = () => {
 };
 
 const AboutSection = () => {
+    let imageBuilder = {
+        id: "Index/about-julio",
+        alt: "julio caesar about",
+    };
+    let imageSize = "medium";
     return (
         <section className="flex py-[10vh] md:py-[15vh] max-w-[1440px] items-center w-full mx-auto relative mt-40">
             <div className="w-full px-[5vw] md:px-20 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-20">
                 <div className="col-span-full lg:col-span-4">
-                    <img
+                    {/* <img
                         src="./about.jpg"
                         alt="Julio with Tiger graffiti"
                         className="rounded-lg w-full lg:w-[300px] h-full max-h-[370px] object-cover"
+                    /> */}
+                    {/* <img
+                        className={clsx("h-auto w-full object-contain", {
+                            "max-h-50vh": imageSize === "medium",
+                            "max-h-75vh": imageSize === "giant",
+                        })}
+                        {...getHeroImageProps(imageBuilder)}
+                    /> */}
+
+                    <img
+                        // key={frontmatter.bannerCloudinaryId}
+                        // title={frontmatter.bannerCredit}
+                        className="rounded-lg object-cover object-center"
+                        {...getImgProps(getImageBuilder("Index/about-julio"), {
+                            widths: [
+                                280, 560, 840, 1100, 1650, 2500, 2100, 3100,
+                            ],
+                            sizes: [
+                                "(max-width:1023px) 80vw",
+                                "(min-width:1024px) and (max-width:1620px) 67vw",
+                                "1100px",
+                            ],
+                            transformations: {
+                                background: "rgb:e6e9ee",
+                            },
+                        })}
                     />
                 </div>
                 <div className="col-span-full lg:col-span-6 lg:col-start-6 mt-16 lg:mt-0">
@@ -395,3 +430,18 @@ const AboutSection = () => {
         </section>
     );
 };
+
+function getHeroImageProps(
+    imageBuilder: ImageBuilder,
+    transformations?: TransformerOption,
+) {
+    return getImgProps(imageBuilder, {
+        widths: [256, 550, 700, 900, 1300, 1800],
+        sizes: [
+            "(max-width: 1023px) 80vw",
+            "(min-width: 1024px) and (max-width: 1279px) 50vw",
+            "(min-width: 1280px) 900px",
+        ],
+        transformations,
+    });
+}
