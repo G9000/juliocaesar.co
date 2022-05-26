@@ -19,10 +19,12 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
     const blogs = useLoaderData<Blog[]>();
+    // const blogs: Blog[] = [];
     // clear toast
-    useEffect(() => {
-        toast.dismiss();
-    }, []);
+
+    function UrlResolver(slug: string) {
+        return `/blogs/${slug}`;
+    }
 
     return (
         <div>
@@ -30,33 +32,40 @@ export default function Index() {
                 <HeroSectionBg />
                 <HeroSection />
             </section>
+            {blogs.length > 0 && (
+                <section className="py-[260px] max-w-[1180px] w-full mx-auto relative">
+                    <h2 className="text-5xl text-white font-semibold">
+                        Featured post
+                    </h2>
 
-            <section className="py-[260px] max-w-[1180px] w-full mx-auto relative">
-                <h2 className="text-5xl text-white font-semibold">
-                    Featured post
-                </h2>
-                <div className="mt-10 grid grid-cols-3 gap-x-10">
-                    {blogs.map((blog, idx) => (
-                        <Link to={blog.slug} key={idx} className="">
-                            {/* <img
+                    <div className="mt-10 grid grid-cols-3 gap-x-10">
+                        {blogs.map((blog, idx) => (
+                            <Link
+                                to={UrlResolver(blog.slug)}
+                                key={idx}
+                                className=""
+                            >
+                                {/* <img
                                 src={urlFor(blog.thumbnail).width(375).url()}
                                 alt="asda"
                             /> */}
-                            <div className="mt-6">
-                                {/* <span className="text-xl text-white text-opacity-40">
+                                <div className="mt-6">
+                                    {/* <span className="text-xl text-white text-opacity-40">
                                     {blog.createdAt}
                                 </span> */}
-                                <h4 className="text-4xl font-bold mt-4 text-white text-opacity-80">
-                                    {blog.title}
-                                </h4>
-                                {/* <p className="text-lg text-white text-opacity-60">
+                                    <h4 className="text-4xl font-bold mt-4 text-white text-opacity-80">
+                                        {blog.title}
+                                    </h4>
+                                    {/* <p className="text-lg text-white text-opacity-60">
                                     {blog.description}
                                 </p> */}
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <AboutSection />
         </div>
     );
@@ -367,13 +376,13 @@ const AboutSection = () => {
     return (
         <section className="flex py-[10vh] md:py-[15vh] max-w-[1440px] items-center w-full mx-auto relative mt-40">
             <div className="w-full px-[6.5vw] grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-20">
-                <div className="col-span-full lg:col-span-6">
+                <div className="col-span-full lg:col-span-4">
                     <img
                         className="h-auto w-full object-contain rounded-lg"
                         {...getIndexAboutImg(imageBuilder)}
                     />
                 </div>
-                <div className="lg:col-start-7 col-span-full lg:col-span-6 mt-16 lg:mt-0">
+                <div className="lg:col-start-6 col-span-full lg:col-span-6 mt-16 lg:mt-0">
                     <h2 className="text-3xl text-gray-100 font-semibold">
                         Hi, I'm Julio Caesar. I help clients build delightful
                         quality software through design and development.

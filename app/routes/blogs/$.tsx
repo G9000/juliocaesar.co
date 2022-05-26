@@ -3,7 +3,8 @@ import { useMemo } from "react";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { getBlog } from "~/utils/blogs";
+import { getBlog, getBannerTitleProp, getBannerAltProp } from "~/utils/blogs";
+import { getImgProps, getImageBuilder } from "~/libs/ImageBuilder";
 
 type LoaderData = {
     frontmatter: any;
@@ -27,10 +28,39 @@ export default function Blog() {
     const { code, frontmatter } = useLoaderData<LoaderData>();
     const Component = useMemo(() => getMDXComponent(code), [code]);
 
+    console.log("frontmatter", frontmatter);
+
     return (
         <div>
             <Link to="/">← Back to blog index</Link>
             <h1>{frontmatter.title}</h1>
+            {frontmatter.bannerCloudinaryId ? (
+                <div className="col-span-full mt-10 lg:col-span-10 lg:col-start-2 lg:mt-16">
+                    <img
+                        className="rounded-lg object-cover object-center"
+                        title={getBannerTitleProp(frontmatter)}
+                        {...getImgProps(
+                            getImageBuilder(
+                                frontmatter.bannerCloudinaryId,
+                                getBannerAltProp(frontmatter),
+                            ),
+                            {
+                                widths: [
+                                    280, 560, 840, 1100, 1650, 2500, 2100, 3100,
+                                ],
+                                sizes: [
+                                    "(max-width:1023px) 80vw",
+                                    "(min-width:1024px) and (max-width:1620px) 67vw",
+                                    "1100px",
+                                ],
+                                transformations: {
+                                    background: "rgb:e6e9ee",
+                                },
+                            },
+                        )}
+                    />
+                </div>
+            ) : null}
             <Component />
         </div>
     );

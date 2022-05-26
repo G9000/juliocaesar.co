@@ -49,12 +49,12 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                 </Link>
                             </ul>
                             <div className="flex gap-x-4 items-center">
-                                <button
-                                    onClick={() => blockUrl()}
+                                <a
+                                    href="mailto:leo.caesar@live.com"
                                     className="py-4 px-6 bg-black hover:bg-cyan-900 hover:bg-opacity-10 text-white rounded-lg shadow-lg font-bold hover:shadow-xl hover:shadow-cyan-400/20 hover:ring-2 hover:ring-cyan-200 hover:text-cyan-200"
                                 >
                                     Let's have a chat
-                                </button>
+                                </a>
                             </div>
                         </>
                     ) : (

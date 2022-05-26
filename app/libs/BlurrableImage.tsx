@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 
-function BlurrableImageBuilder({
+function BlurrableImage({
     img,
     blurDataUrl,
     ...rest
@@ -60,4 +60,4 @@ function BlurrableImageBuilder({
     );
 }
 
-export { BlurrableImageBuilder };
+export { BlurrableImage };
