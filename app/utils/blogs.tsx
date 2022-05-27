@@ -54,7 +54,6 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
     const { default: rehypeAutolinkHeadings } = await import(
         "rehype-autolink-headings"
     );
-    const { default: rehypeToc } = await import("rehype-toc");
     const { default: rehypeSlug } = await import("rehype-slug");
 
     try {
@@ -69,7 +68,6 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
                     ...(options.rehypePlugins ?? []),
                     rehypeAutolinkHeadings,
                     rehypeSlug,
-                    rehypeToc,
                     rehypeHighlight,
                 ];
                 return options;
@@ -77,7 +75,7 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
         });
         const readTime = calculateReadingTime(source).text;
         frontmatter.bannerBlurDataUrl = await getBlurDataUrl(
-            frontmatter.bannerCloudinaryId,
+            frontmatter.bannerCloudinaryId ?? "",
         );
         frontmatter.date = new Date(frontmatter.date).toLocaleDateString(
             "en-US",
