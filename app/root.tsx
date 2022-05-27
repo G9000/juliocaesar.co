@@ -9,6 +9,7 @@ import {
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import { Layout } from "./components/layout/Layout";
+import { Toaster } from "react-hot-toast";
 
 export const meta: MetaFunction = () => ({
     charset: "utf-8",
@@ -31,6 +32,7 @@ export default function App() {
                 <Scripts />
                 <LiveReload />
             </Layout>
+            <Toaster />
         </html>
     );
 }

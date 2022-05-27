@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSSRLayoutEffect } from "~/utils/misc";
 import clsx from "clsx";
 
 function BlurrableImage({
@@ -11,6 +12,10 @@ function BlurrableImage({
 } & React.HTMLAttributes<HTMLDivElement>) {
     const [visible, setVisible] = React.useState(false);
     const jsImgElRef = React.useRef<HTMLImageElement>(null);
+
+    useSSRLayoutEffect(() => {
+        if (jsImgElRef.current?.complete) setVisible(true);
+    }, []);
 
     React.useEffect(() => {
         if (!jsImgElRef.current) return;

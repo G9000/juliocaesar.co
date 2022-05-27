@@ -13,9 +13,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     const NavLinkStyle = "cursor-pointer hover:text-cyan-200";
 
     function blockUrl() {
-        toast.error(
-            "🚧 👷🏽 Halt! Still under construction. Last update May 19 2022 👷🏼‍♀️ 🚧",
-        );
+        toast.error("🚧 Halt! Still under construction. 🚧");
         console.log("Not ready");
     }
 
@@ -35,18 +33,30 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                 <Link to="/" className={NavLinkStyle}>
                                     Home
                                 </Link>
-                                <Link to="/" className={NavLinkStyle}>
+                                <button
+                                    onClick={() => blockUrl()}
+                                    className={NavLinkStyle}
+                                >
                                     Blogs
-                                </Link>
-                                <Link to="/" className={NavLinkStyle}>
+                                </button>
+                                <button
+                                    onClick={() => blockUrl()}
+                                    className={NavLinkStyle}
+                                >
                                     Library
-                                </Link>
-                                <Link to="/" className={NavLinkStyle}>
+                                </button>
+                                <button
+                                    onClick={() => blockUrl()}
+                                    className={NavLinkStyle}
+                                >
                                     Weekend Project
-                                </Link>
-                                <Link to="/" className={NavLinkStyle}>
+                                </button>
+                                <button
+                                    onClick={() => blockUrl()}
+                                    className={NavLinkStyle}
+                                >
                                     About
-                                </Link>
+                                </button>
                             </ul>
                             <div className="flex gap-x-4 items-center">
                                 <a

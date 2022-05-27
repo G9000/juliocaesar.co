@@ -13,6 +13,6 @@ module.exports = {
         corePlugins: {
             aspectRatio: false,
         },
-        plugins: [],
     },
+    plugins: [require("@tailwindcss/typography")],
 };

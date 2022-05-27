@@ -18,8 +18,8 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-    const blogs = useLoaderData<Blog[]>();
-    // const blogs: Blog[] = [];
+    // const blogs = useLoaderData<Blog[]>();
+    const blogs: Blog[] = [];
     // clear toast
 
     function UrlResolver(slug: string) {
@@ -73,11 +73,14 @@ export default function Index() {
 
 const HeroSection = () => {
     function blockUrl() {
-        toast.error(
-            "🚧 👷🏽 Halt! Still under construction. Last update May 19 2022 👷🏼‍♀️ 🚧",
-        );
+        toast.error("🚧 Halt! Still under construction. 🚧");
         console.log("Not ready");
     }
+
+    // clear toast
+    useEffect(() => {
+        toast.dismiss();
+    }, []);
     return (
         <div className="flex py-[10vh] md:py-[15vh] max-w-[1440px] items-center w-full mx-auto relative">
             <div className="w-full xl:w-2/3 px-[5vw] md:px-20">

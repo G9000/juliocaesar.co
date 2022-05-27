@@ -15,9 +15,9 @@ export type PostMarkdownAttributes = {
 
 export function getBannerTitleProp(frontmatter: MdxPage["frontmatter"]) {
     return (
+        frontmatter.bannerCredit ??
         frontmatter.bannerTitle ??
-        frontmatter.bannerAlt ??
-        frontmatter.bannerCredit
+        frontmatter.bannerAlt
     );
 }
 
