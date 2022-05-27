@@ -4,6 +4,7 @@ import { bundleMDX } from "./mdx.server";
 import type { MdxPage } from "types";
 import { path, blogDirr } from "./dirr.server";
 import calculateReadingTime from "reading-time";
+import { getBlurDataUrl } from "~/libs/ImageBuilder";
 
 export type Blog = {
     slug: string;
@@ -51,7 +52,7 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
     const { default: rehypeSlug } = await import("rehype-slug");
 
     try {
-        const { frontmatter, code } = await bundleMDX({
+        let { frontmatter, code } = await bundleMDX({
             source,
             mdxOptions(options) {
                 options.remarkPlugins = [
@@ -68,11 +69,15 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
                 return options;
             },
         });
-
         const readTime = calculateReadingTime(source).text;
+        const bannerBlurDataUrl = await getBlurDataUrl(
+            frontmatter.bannerCloudinaryId,
+        );
+
         return {
             code,
             readTime,
+            bannerBlurDataUrl,
             frontmatter: frontmatter as FrontmatterType,
         };
     } catch (error: unknown) {

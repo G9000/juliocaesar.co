@@ -18,17 +18,9 @@ export const links: LinksFunction = () => {
 };
 
 export default function Blogs() {
-    const blogs = useLoaderData<Blog[]>();
+    // const blogs = useLoaderData<Blog[]>();
     return (
         <div>
-            <h1>Blog</h1>
-            <ul>
-                {blogs.map((blog) => (
-                    <li key={blog.slug}>
-                        <Link to={blog.slug}>{blog.title}</Link>
-                    </li>
-                ))}
-            </ul>
             <Outlet />
         </div>
     );

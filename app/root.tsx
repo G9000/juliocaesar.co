@@ -31,8 +31,8 @@ export default function App() {
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />
+                <Toaster />
             </Layout>
-            <Toaster />
         </html>
     );
 }
