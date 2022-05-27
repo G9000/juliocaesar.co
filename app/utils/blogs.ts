@@ -3,6 +3,7 @@ import { readFile, readdir } from "./fs.server";
 import { bundleMDX } from "./mdx.server";
 import type { MdxPage } from "types";
 import { path, blogDirr } from "./dirr.server";
+import calculateReadingTime from "reading-time";
 
 export type Blog = {
     slug: string;
@@ -34,7 +35,9 @@ export function getBannerAltProp(frontmatter: MdxPage["frontmatter"]) {
 export const BLOG_PATH = blogDirr;
 
 // Get the mdx files in the blog directory
-export async function getBlog(slug: string) {
+export async function getBlog<FrontmatterType extends Record<string, unknown>>(
+    slug: string,
+) {
     const source = await readFile(path.join(BLOG_PATH, `${slug}.mdx`), "utf-8");
 
     const rehypeHighlight = await import("rehype-highlight").then(
@@ -48,7 +51,7 @@ export async function getBlog(slug: string) {
     const { default: rehypeSlug } = await import("rehype-slug");
 
     try {
-        const blogs = await bundleMDX({
+        const { frontmatter, code } = await bundleMDX({
             source,
             mdxOptions(options) {
                 options.remarkPlugins = [
@@ -62,11 +65,16 @@ export async function getBlog(slug: string) {
                     rehypeToc,
                     rehypeHighlight,
                 ];
-
                 return options;
             },
         });
-        return blogs;
+
+        const readTime = calculateReadingTime(source).text;
+        return {
+            code,
+            readTime,
+            frontmatter: frontmatter as FrontmatterType,
+        };
     } catch (error: unknown) {
         console.error("Compilation error for slug: ", slug);
         throw error;

@@ -9,6 +9,7 @@ import { getImgProps, getImageBuilder } from "~/libs/ImageBuilder";
 type LoaderData = {
     frontmatter: any;
     code: string;
+    readTime: number;
 };
 
 export const loader: LoaderFunction = async ({ params, request }) => {
@@ -17,16 +18,17 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     const blog = await getBlog(slug);
     if (blog) {
-        const { frontmatter, code } = blog;
-        return json({ frontmatter, code });
+        return json(blog);
     } else {
         throw new Response("Not found", { status: 404 });
     }
 };
 
 export default function Blog() {
-    const { code, frontmatter } = useLoaderData<LoaderData>();
+    const { code, frontmatter, readTime } = useLoaderData<LoaderData>();
     const Component = useMemo(() => getMDXComponent(code), [code]);
+
+    console.log("readTime", readTime);
 
     return (
         <div className="max-w-[1440px] w-full mx-auto">

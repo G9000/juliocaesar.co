@@ -18,8 +18,8 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-    // const blogs = useLoaderData<Blog[]>();
-    const blogs: Blog[] = [];
+    const blogs = useLoaderData<Blog[]>();
+    // const blogs: Blog[] = [];
     // clear toast
 
     function UrlResolver(slug: string) {
