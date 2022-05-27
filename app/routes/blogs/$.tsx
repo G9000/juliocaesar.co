@@ -6,12 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 import { getBlog, getBannerTitleProp, getBannerAltProp } from "~/utils/blogs";
 import { getImgProps, getImageBuilder } from "~/libs/ImageBuilder";
 import { BlurrableImage } from "~/libs/BlurrableImage";
-
-type LoaderData = {
-    frontmatter: any;
-    code: string;
-    readTime: string;
-};
+import type { MdxPage } from "types";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
     const slug = params["*"];
@@ -26,14 +21,8 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 };
 
 export default function Blog() {
-    const { code, frontmatter, readTime, bannerBlurDataUrl } = useLoaderData();
+    const { code, frontmatter, readTime } = useLoaderData<MdxPage>();
     const Component = useMemo(() => getMDXComponent(code), [code]);
-
-    let dateConfig = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    } as const;
 
     return (
         <div className="max-w-[1440px] w-full mx-auto">
@@ -43,10 +32,7 @@ export default function Blog() {
                         {frontmatter.title}
                     </h1>
                     <p className="text-gray-400 font-bold text-xl">
-                        {new Date(frontmatter.date).toLocaleDateString(
-                            "en-US",
-                            dateConfig,
-                        )}
+                        {frontmatter.date}
                         {" — "}
                         {readTime}
                     </p>
@@ -55,7 +41,7 @@ export default function Blog() {
                 {frontmatter.bannerCloudinaryId && (
                     <BlurrableImage
                         key={frontmatter.bannerCloudinaryId}
-                        blurDataUrl={bannerBlurDataUrl}
+                        blurDataUrl={frontmatter.bannerBlurDataUrl}
                         className="aspect-h-4 aspect-w-3 md:aspect-w-3 md:aspect-h-2"
                         img={
                             <img

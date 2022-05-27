@@ -33,6 +33,12 @@ export function getBannerAltProp(frontmatter: MdxPage["frontmatter"]) {
     );
 }
 
+let dateConfig = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+} as const;
+
 export const BLOG_PATH = blogDirr;
 
 // Get the mdx files in the blog directory
@@ -52,7 +58,7 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
     const { default: rehypeSlug } = await import("rehype-slug");
 
     try {
-        let { frontmatter, code } = await bundleMDX({
+        const { frontmatter, code } = await bundleMDX({
             source,
             mdxOptions(options) {
                 options.remarkPlugins = [
@@ -70,14 +76,17 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
             },
         });
         const readTime = calculateReadingTime(source).text;
-        const bannerBlurDataUrl = await getBlurDataUrl(
+        frontmatter.bannerBlurDataUrl = await getBlurDataUrl(
             frontmatter.bannerCloudinaryId,
+        );
+        frontmatter.date = new Date(frontmatter.date).toLocaleDateString(
+            "en-US",
+            dateConfig,
         );
 
         return {
             code,
             readTime,
-            bannerBlurDataUrl,
             frontmatter: frontmatter as FrontmatterType,
         };
     } catch (error: unknown) {
