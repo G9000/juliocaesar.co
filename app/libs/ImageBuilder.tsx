@@ -37,6 +37,10 @@ const imageLists = createImages({
         id: "Index/about-julio",
         alt: "julio caesar about",
     },
+    IndexMySetup: {
+        id: "Index/my-setup",
+        alt: "my current setup",
+    },
 });
 
 function getImgProps(

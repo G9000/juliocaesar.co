@@ -25,9 +25,9 @@ export default function Blog() {
     const Component = useMemo(() => getMDXComponent(code), [code]);
 
     return (
-        <div className="max-w-[1440px] w-full mx-auto">
+        <div className="max-w-[1620px] w-full mx-auto">
             <div className="px-[10vw] py-40">
-                <div className="px-40 pb-20 space-y-6">
+                <div className="px-[10vw] pb-14 space-y-4">
                     <h1 className="text-4xl text-white font-semibold">
                         {frontmatter.title}
                     </h1>
@@ -72,7 +72,7 @@ export default function Blog() {
                         }
                     />
                 )}
-                <div className="prose lg:prose-xl prose-h2:text-white">
+                <div className="mt-20 prose lg:prose-xl prose-h2:text-white">
                     <Component />
                 </div>
             </div>

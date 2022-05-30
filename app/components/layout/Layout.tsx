@@ -23,10 +23,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <body className="flex w-full bg-neutral-900 relative">
+        <body className="flex w-full bg-neutral-900 relative font-basicSans">
             <div className="w-full min-h-screen h-full flex flex-col">
                 <div className="hidden md:block bg-cyan-200 bg-opacity-5 border-b border-cyan-500 sticky top-0 z-50" />
-                <nav className="flex justify-between items-center max-w-[1640px] w-full mx-auto h-[90px] my-6 z-50 px-[5vw]">
+                <nav className="flex justify-between items-center max-w-[1840px] w-full mx-auto h-[90px] my-6 z-50 px-[5vw]">
                     {!isMobile ? (
                         <>
                             <ul className="text-white flex gap-x-8 text-xl font-semibold">
@@ -51,12 +51,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                 >
                                     Weekend Project
                                 </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
+                                <Link to="/about" className={NavLinkStyle}>
                                     About
-                                </button>
+                                </Link>
                             </ul>
                             <div className="flex gap-x-4 items-center">
                                 <a
