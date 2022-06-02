@@ -27,15 +27,17 @@ export default function Blog() {
     return (
         <div className="max-w-[1620px] w-full mx-auto">
             <div className="px-[10vw] py-40">
-                <div className="px-[10vw] pb-14 space-y-4">
-                    <h1 className="text-4xl text-white font-semibold">
-                        {frontmatter.title}
-                    </h1>
-                    <p className="text-gray-400 font-bold text-xl">
-                        {frontmatter.date}
-                        {" — "}
-                        {readTime}
-                    </p>
+                <div className="w-full grid grid-cols-12 pb-14">
+                    <div className="col-span-8 col-start-3 space-y-4">
+                        <h1 className="text-4xl text-white font-semibold">
+                            {frontmatter.title}
+                        </h1>
+                        <p className="text-gray-400 font-bold text-xl">
+                            {frontmatter.date}
+                            {" — "}
+                            {readTime}
+                        </p>
+                    </div>
                 </div>
 
                 {frontmatter.bannerCloudinaryId && (
@@ -72,8 +74,10 @@ export default function Blog() {
                         }
                     />
                 )}
-                <div className="mt-20 prose lg:prose-xl prose-h2:text-white">
-                    <Component />
+                <div className="mt-20 w-full grid grid-cols-12">
+                    <div className="col-span-8 col-start-3 prose prose-invert prose-p:text-gray-500 lg:prose-xl prose-h2:text-white">
+                        <Component />
+                    </div>
                 </div>
             </div>
         </div>
