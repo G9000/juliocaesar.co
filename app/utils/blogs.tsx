@@ -33,11 +33,19 @@ export function getBannerAltProp(frontmatter: MdxPage["frontmatter"]) {
     );
 }
 
-let dateConfig = {
+export let dateConfig = {
     year: "numeric",
     month: "long",
     day: "numeric",
 } as const;
+
+export function dateConverter(date?: string) {
+    if (!date) {
+        throw new Error("You forgot to pass the date");
+    }
+
+    return new Date(date).toLocaleDateString("en-US", dateConfig);
+}
 
 export const BLOG_PATH = blogDirr;
 
@@ -77,11 +85,7 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
         frontmatter.bannerBlurDataUrl = await getBlurDataUrl(
             frontmatter.bannerCloudinaryId ?? "",
         );
-        frontmatter.date = new Date(frontmatter.date).toLocaleDateString(
-            "en-US",
-            dateConfig,
-        );
-
+        frontmatter.date = dateConverter(frontmatter.date);
         return {
             code,
             readTime,
@@ -102,11 +106,16 @@ export async function getBlogs() {
     const blogs = await Promise.all(
         blogsPath.map(async (dirent) => {
             const file = await readFile(path.join(BLOG_PATH, dirent.name));
-            const { attributes } = parseFrontMatter(file.toString());
+            const source = file.toString();
+            const { attributes }: { attributes: MdxPage["frontmatter"] } =
+                parseFrontMatter(source.toString());
+            attributes.bannerBlurDataUrl = await getBlurDataUrl(
+                attributes.bannerCloudinaryId ?? "",
+            );
             return {
                 slug: dirent.name.replace(/\.mdx/, ""),
-                //@ts-ignore
-                title: attributes.title,
+                readTime: calculateReadingTime(source).text,
+                frontmatter: { ...attributes },
             };
         }),
     );

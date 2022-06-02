@@ -7,10 +7,16 @@ import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { getBlogs } from "~/utils/blogs";
-import type { Blog } from "~/utils/blogs";
 import type { TransformerOption } from "@cld-apis/types";
 import type { ImageBuilder } from "~/libs/ImageBuilder";
-import { getImgProps, imageLists } from "~/libs/ImageBuilder";
+import { BlurrableImage } from "~/libs/BlurrableImage";
+import { getImgProps, imageLists, getImageBuilder } from "~/libs/ImageBuilder";
+import {
+    getBannerTitleProp,
+    getBannerAltProp,
+    dateConverter,
+} from "~/utils/blogs";
+import type { MdxPage } from "types";
 // import clsx from "clsx";
 
 export const loader: LoaderFunction = async () => {
@@ -18,8 +24,10 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-    // const blogs = useLoaderData<Blog[]>();
-    const blogs: Blog[] = [];
+    const blogs = useLoaderData<MdxPage[]>();
+    // const blogs: Blog[] = [];
+
+    console.log("blogs", blogs);
 
     function UrlResolver(slug: string) {
         return `/blogs/${slug}`;
@@ -32,32 +40,75 @@ export default function Index() {
                 <HeroSection />
             </section>
             {blogs.length > 0 && (
-                <section className="py-[260px] max-w-[1180px] w-full mx-auto relative">
+                <section className="py-[260px] max-w-[1180px] w-full mx-auto px-[5vw] md:px-20">
                     <h2 className="text-5xl text-white font-semibold">
                         Featured post
                     </h2>
 
                     <div className="mt-10 grid grid-cols-3 gap-x-10">
                         {blogs.map((blog, idx) => (
-                            <Link
-                                to={UrlResolver(blog.slug)}
-                                key={idx}
-                                className=""
-                            >
-                                {/* <img
-                                src={urlFor(blog.thumbnail).width(375).url()}
-                                alt="asda"
-                            /> */}
-                                <div className="mt-6">
-                                    {/* <span className="text-xl text-white text-opacity-40">
-                                    {blog.createdAt}
-                                </span> */}
-                                    <h4 className="text-4xl font-bold mt-4 text-white text-opacity-80">
-                                        {blog.title}
+                            <Link to={UrlResolver(blog.slug)} key={idx}>
+                                <div>
+                                    {blog.frontmatter.bannerCloudinaryId && (
+                                        <BlurrableImage
+                                            key={
+                                                blog.frontmatter
+                                                    .bannerCloudinaryId
+                                            }
+                                            blurDataUrl={
+                                                blog.frontmatter
+                                                    .bannerBlurDataUrl
+                                            }
+                                            className="aspect-h-4 aspect-w-3 md:aspect-w-3 md:aspect-h-2"
+                                            img={
+                                                <img
+                                                    key={
+                                                        blog.frontmatter
+                                                            .bannerCloudinaryId
+                                                    }
+                                                    title={getBannerTitleProp(
+                                                        blog.frontmatter,
+                                                    )}
+                                                    className="rounded-lg object-cover object-center w-full"
+                                                    {...getImgProps(
+                                                        getImageBuilder(
+                                                            blog.frontmatter
+                                                                .bannerCloudinaryId,
+                                                            getBannerAltProp(
+                                                                blog.frontmatter,
+                                                            ),
+                                                        ),
+                                                        {
+                                                            widths: [
+                                                                280, 560, 840,
+                                                                1100, 1650,
+                                                                2500, 2100,
+                                                                3100,
+                                                            ],
+                                                            sizes: [
+                                                                "(max-width:1023px) 80vw",
+                                                                "(min-width:1024px) and (max-width:1620px) 67vw",
+                                                                "1100px",
+                                                            ],
+                                                            transformations: {
+                                                                background:
+                                                                    "rgb:e6e9ee",
+                                                            },
+                                                        },
+                                                    )}
+                                                />
+                                            }
+                                        />
+                                    )}
+
+                                    <p className="text-gray-400 font-bold text-xl mt-6">
+                                        {dateConverter(blog.frontmatter.date)}
+                                        {" — "}
+                                        {blog.readTime}
+                                    </p>
+                                    <h4 className="text-3xl font-bold text-white text-opacity-80 mt-4">
+                                        {blog.frontmatter.title}
                                     </h4>
-                                    {/* <p className="text-lg text-white text-opacity-60">
-                                    {blog.description}
-                                </p> */}
                                 </div>
                             </Link>
                         ))}
