@@ -1,14 +1,15 @@
-import React from "react";
+import * as React from "react";
+import { Theme, useTheme } from "~/providers/theme-provider";
 import { Link } from "@remix-run/react";
-import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useMedia } from "react-use";
 import { toast } from "react-hot-toast";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
     const isMobile = useMedia("(max-width: 848px)", false);
-    let [isOpen, setIsOpen] = useState<boolean>(false);
+    let [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const [theme, setTheme] = useTheme();
 
     const NavLinkStyle = "cursor-pointer hover:text-cyan-200";
 
@@ -17,19 +18,25 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         console.log("Not ready");
     }
 
+    function toggleTheme() {
+        setTheme((prevTheme) =>
+            prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT,
+        );
+    }
+
     // clear toast
-    useEffect(() => {
+    React.useEffect(() => {
         toast.dismiss();
     }, []);
 
     return (
-        <body className="flex w-full bg-neutral-900 relative font-basicSans">
+        <body className="flex w-full bg-neutral-100 dark:bg-neutral-900 transition ease-in-out delay-150 duration-300 relative font-basicSans">
             <div className="w-full min-h-screen h-full flex flex-col">
                 <div className="hidden md:block bg-cyan-200 bg-opacity-5 border-b border-cyan-500 sticky top-0 z-50" />
                 <nav className="flex justify-between items-center max-w-[1840px] w-full mx-auto h-[90px] my-6 z-50 px-[5vw]">
                     {!isMobile ? (
                         <>
-                            <ul className="text-white flex gap-x-8 text-xl font-semibold">
+                            <ul className="text-gray-900 dark:text-gray-100 flex gap-x-8 text-xl font-semibold">
                                 <Link to="/" className={NavLinkStyle}>
                                     Home
                                 </Link>
@@ -55,13 +62,20 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                     About
                                 </Link>
                             </ul>
-                            <div className="flex gap-x-4 items-center">
-                                <a
-                                    href="mailto:leo.caesar@live.com"
-                                    className="py-4 px-6 bg-black hover:bg-cyan-900 hover:bg-opacity-10 text-white rounded-lg shadow-lg font-bold hover:shadow-xl hover:shadow-cyan-400/20 hover:ring-2 hover:ring-cyan-200 hover:text-cyan-200"
+                            <div className="flex gap-x-4">
+                                <button
+                                    onClick={toggleTheme}
+                                    className="flex gap-x-4 text-xl items-center p-4 border border-black dark:bg-black text-gray-900 dark:text-gray-100 rounded-lg shadow-lg font-bold"
                                 >
+                                    {theme === "light" ? (
+                                        <HiOutlineSun />
+                                    ) : (
+                                        <HiOutlineMoon />
+                                    )}
+                                </button>
+                                <button className="flex gap-x-4 items-center py-4 px-6 border border-black dark:bg-black hover:bg-cyan-900 hover:bg-opacity-10 text-gray-900 dark:text-gray-100 rounded-lg shadow-lg font-bold hover:shadow-xl hover:shadow-cyan-400/20 hover:ring-2 hover:ring-cyan-200">
                                     Let's have a chat
-                                </a>
+                                </button>
                             </div>
                         </>
                     ) : (
