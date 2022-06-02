@@ -15,10 +15,6 @@
     opacity: 0.3;
 }
 
-.grid-tile {
-    background: url("/grid-tiles.svg") top -1px center;
-}
-
 .ul-border {
     border-style: solid;
     border-width: 0 0 0 0.85rem;

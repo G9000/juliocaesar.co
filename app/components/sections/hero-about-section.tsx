@@ -16,7 +16,7 @@ const AboutSection = () => {
                     />
                 </div>
                 <div className="lg:col-start-6 col-span-full lg:col-span-6 mt-16 lg:mt-0">
-                    <h2 className="text-3xl text-gray-100 font-semibold">
+                    <h2 className="text-3xl text-black dark:text-gray-100 font-semibold transition ease-in-out delay-150 duration-300">
                         Hi, I'm Julio Caesar. I help clients build delightful
                         quality software through design and development.
                     </h2>
@@ -29,10 +29,10 @@ const AboutSection = () => {
 
                     <Link
                         to="/about"
-                        className="inline-flex mt-16 text-gray-100 gap-x-6 items-center text-2xl group"
+                        className="inline-flex mt-16 text-gray-600 dark:text-gray-100 gap-x-6 items-center text-2xl group"
                     >
                         Know more about me
-                        <div className="border rounded-full p-2 border-gray-100 border-opacity-20 group-hover:text-cyan-200 group-hover:border-cyan-200 ease-in-out duration-300">
+                        <div className="border rounded-full p-2 border-gray-600 dark:border-gray-100 border-opacity-20 group-hover:text-cyan-200 group-hover:border-cyan-200 ease-in-out duration-300">
                             <HiArrowSmRight />
                         </div>
                     </Link>

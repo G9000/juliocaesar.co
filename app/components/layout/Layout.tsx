@@ -5,13 +5,15 @@ import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useMedia } from "react-use";
 import { toast } from "react-hot-toast";
+import clsx from "clsx";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
     const isMobile = useMedia("(max-width: 848px)", false);
     let [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [theme, setTheme] = useTheme();
 
-    const NavLinkStyle = "cursor-pointer hover:text-cyan-200";
+    const NavLinkStyle =
+        "cursor-pointer hover:text-cyan-800 dark:hover:text-cyan-200 transition ease-in-out delay-150 duration-300";
 
     function blockUrl() {
         toast.error("🚧 Halt! Still under construction. 🚧");
@@ -65,7 +67,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                             <div className="flex gap-x-4">
                                 <button
                                     onClick={toggleTheme}
-                                    className="flex gap-x-4 text-xl items-center p-4 border border-black dark:bg-black text-gray-900 dark:text-gray-100 rounded-lg shadow-lg font-bold"
+                                    className={clsx(
+                                        "flex gap-x-4 text-xl items-center p-4 rounded-lg shadow-lg font-bold",
+                                        "border border-black dark:border-transparent dark:bg-black text-gray-900 dark:text-gray-100 hover:bg-black hover:text-gray-100 dark:hover:bg-cyan-800",
+                                        "transition ease-in-out duration-300",
+                                    )}
                                 >
                                     {theme === "light" ? (
                                         <HiOutlineSun />
@@ -73,7 +79,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                         <HiOutlineMoon />
                                     )}
                                 </button>
-                                <button className="flex gap-x-4 items-center py-4 px-6 border border-black dark:bg-black hover:bg-cyan-900 hover:bg-opacity-10 text-gray-900 dark:text-gray-100 rounded-lg shadow-lg font-bold hover:shadow-xl hover:shadow-cyan-400/20 hover:ring-2 hover:ring-cyan-200">
+                                <button
+                                    className={clsx(
+                                        "flex gap-x-4 items-center py-4 px-6 border border-black dark:border-transparent",
+                                        "hover:bg-black dark:bg-black dark:hover:bg-cyan-800 text-gray-900 dark:text-gray-100 hover:text-gray-100",
+                                        "rounded-lg shadow-lg font-bold hover:shadow-xl transition ease-in-out duration-300",
+                                    )}
+                                >
                                     Let's have a chat
                                 </button>
                             </div>

@@ -9,6 +9,10 @@ module.exports = {
                 basicSans: ["basic-sans", ...defaultTheme.fontFamily.sans],
                 karminaSans: "karmina-sans",
             },
+            backgroundImage: {
+                "grid-tile-light": "url('/grid-tiles-light.svg')",
+                "grid-tile": "url('/grid-tiles.svg')",
+            },
         },
         corePlugins: {
             aspectRatio: false,

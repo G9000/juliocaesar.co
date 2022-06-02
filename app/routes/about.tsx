@@ -9,7 +9,7 @@ const About = () => {
         <div className="max-w-[1840px] w-full mx-auto px-[11vw] py-[10vh]">
             <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12">
                 <div className="space-y-4 col-span-full md:col-span-4 lg:col-span-5 md:row-start-1">
-                    <h2 className="text-3xl lg:text-4xl text-gray-100">
+                    <h2 className="text-3xl lg:text-4xl text-black dark:text-gray-100 transition ease-in-out delay-150 duration-300">
                         Hi, I'm Julio Caesar, I work as a full time web
                         tinkerer.
                     </h2>
@@ -27,7 +27,7 @@ const About = () => {
                     />
                 </div>
             </div>
-            <div className="mt-[16vh] prose prose-lg prose-h3:text-gray-100 prose-p:text-gray-400 mx-auto">
+            <div className="mt-[16vh] prose prose-lg prose-h3:text-black dark:prose-h3:text-gray-100 prose-p:text-gray-400 mx-auto">
                 <div className="my-60">
                     <img
                         className="h-auto w-full object-contain rounded-lg"

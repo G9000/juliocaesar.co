@@ -2,6 +2,7 @@ import * as React from "react";
 import { toast } from "react-hot-toast";
 import { FaGithub, FaBehance, FaLinkedinIn } from "react-icons/fa";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 function HeroSection() {
     function blockUrl() {
@@ -16,7 +17,10 @@ function HeroSection() {
     return (
         <div className="flex py-[10vh] md:py-[15vh] max-w-[1620px] items-center w-full mx-auto relative">
             <div className="w-full xl:w-2/3 px-[5vw] md:px-20">
-                <h1 className="leading-relaxed text-3xl md:text-4xl md:leading-relaxed font-semibold text-white mt-4">
+                <span className="text-gray-600 dark:text-gray-200">
+                    🚧 Still under active development. Updated 6/3/2022 🚧
+                </span>
+                <h1 className="leading-relaxed text-3xl md:text-4xl md:leading-relaxed font-semibold text-black dark:text-gray-100 mt-4">
                     Helping clients to build delightful digital landmarks on the
                     net.
                 </h1>
@@ -31,7 +35,7 @@ function HeroSection() {
                         </button>
                     </div>
 
-                    <div className="inline-flex items-center mt-6 md:mt-0 px-6 rounded-lg h-[70px] gap-x-6  border-opacity-20 bg-black bg-opacity-40 w-fit shadow-lg">
+                    <div className="inline-flex items-center mt-6 md:mt-0 px-6 rounded-lg h-[70px] gap-x-6  border-opacity-20 bg-black bg-opacity-80 dark:bg-opacity-40 w-fit shadow-lg">
                         <span className="text-cyan-200 text-opacity-60">
                             Find me here:
                         </span>
@@ -67,7 +71,7 @@ function HeroSectionBg() {
     return (
         <>
             <div className="absolute inset-0 bg-gradient-spectrum" />
-            <div className="absolute inset-0 grid-tile top -1px center flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-grid-tile-light dark:bg-grid-tile bg-top flex items-center justify-center overflow-hidden transition ease-in-out delay-150 duration-300">
                 <div className="absolute left-[1/2] top-0 h-full">
                     <svg
                         width="2591"
@@ -300,8 +304,21 @@ function HeroSectionBg() {
                     </svg>
                 </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 via-[#18181800] to-neutral-900" />
-            <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-[#18181800] to-neutral-900" />
+            <div
+                className={clsx(
+                    "absolute inset-0",
+                    "bg-gradient-to-b from-neutral-100 via-[#18181800] to-neutral-100",
+                    "dark:bg-gradient-to-b dark:from-neutral-900 dark:via-[#18181800] dark:to-neutral-900",
+                    "transition ease-in-out delay-150 duration-300",
+                )}
+            />
+            <div
+                className={clsx(
+                    "absolute inset-0",
+                    "bg-gradient-to-r from-neutral-100 via-[#18181800] to-neutral-100",
+                    "dark:bg-gradient-to-r dark:from-neutral-900 dark:via-[#18181800] dark:to-neutral-900",
+                )}
+            />
         </>
     );
 }
