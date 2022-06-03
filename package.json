@@ -28,6 +28,7 @@
         "cloudinary-build-url": "^0.2.4",
         "clsx": "^1.1.1",
         "cypress": "^9.6.1",
+        "date-fns": "^2.28.0",
         "esbuild": "^0.14.39",
         "framer-motion": "^6.3.3",
         "front-matter": "^4.0.2",

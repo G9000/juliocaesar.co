@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { getBlog, getBannerTitleProp, getBannerAltProp } from "~/utils/blogs";
+import { getPost, getBannerTitleProp, getBannerAltProp } from "~/utils/posts";
 import { getImgProps, getImageBuilder } from "~/libs/ImageBuilder";
 import { BlurrableImage } from "~/libs/BlurrableImage";
 import type { MdxPage } from "types";
@@ -12,7 +12,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const slug = params["*"];
     if (!slug) throw new Response("Not found", { status: 404 });
 
-    const blog = await getBlog(slug);
+    const blog = await getPost(slug);
     if (blog) {
         return json(blog);
     } else {

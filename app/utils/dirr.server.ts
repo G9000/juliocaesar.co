@@ -1,6 +1,6 @@
 import path from "path";
 
 const dirr = process.cwd();
-const blogDirr = path.join(dirr, "/contents/blogs");
+const postDirr = path.join(dirr, "/contents/posts");
 
-export { path, dirr, blogDirr };
+export { path, dirr, postDirr };

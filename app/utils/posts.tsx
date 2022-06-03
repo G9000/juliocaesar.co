@@ -2,7 +2,7 @@ import parseFrontMatter from "front-matter";
 import { readFile, readdir } from "./fs.server";
 import { bundleMDX } from "./mdx.server";
 import type { MdxPage } from "types";
-import { path, blogDirr } from "./dirr.server";
+import { path, postDirr } from "./dirr.server";
 import calculateReadingTime from "reading-time";
 import { getBlurDataUrl } from "~/libs/ImageBuilder";
 
@@ -33,27 +33,27 @@ export function getBannerAltProp(frontmatter: MdxPage["frontmatter"]) {
     );
 }
 
-export let dateConfig = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-} as const;
+// export let dateConfig = {
+//     year: "numeric",
+//     month: "long",
+//     day: "numeric",
+// } as const;
 
-export function dateConverter(date?: string) {
-    if (!date) {
-        throw new Error("You forgot to pass the date");
-    }
+// export function dateConverter(date?: string) {
+//     if (!date) {
+//         throw new Error("You forgot to pass the date");
+//     }
 
-    return new Date(date).toLocaleDateString("en-US", dateConfig);
-}
+//     return new Date(date).toLocaleDateString("en-US", dateConfig);
+// }
 
-export const BLOG_PATH = blogDirr;
+export const POST_PATH = postDirr;
 
-// Get the mdx files in the blog directory
-export async function getBlog<FrontmatterType extends Record<string, unknown>>(
+// Get the mdx files in the post directory
+export async function getPost<FrontmatterType extends Record<string, unknown>>(
     slug: string,
 ) {
-    const source = await readFile(path.join(BLOG_PATH, `${slug}.mdx`), "utf-8");
+    const source = await readFile(path.join(POST_PATH, `${slug}.mdx`), "utf-8");
 
     const rehypeHighlight = await import("rehype-highlight").then(
         (mod) => mod.default,
@@ -85,7 +85,6 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
         frontmatter.bannerBlurDataUrl = await getBlurDataUrl(
             frontmatter.bannerCloudinaryId ?? "",
         );
-        frontmatter.date = dateConverter(frontmatter.date);
         return {
             code,
             readTime,
@@ -97,15 +96,15 @@ export async function getBlog<FrontmatterType extends Record<string, unknown>>(
     }
 }
 
-// Get all the blogs in the blog directory
-export async function getBlogs() {
-    const blogsPath = await readdir(BLOG_PATH, {
+// Get all the posts in the post directory
+export async function getPosts() {
+    const postsPath = await readdir(POST_PATH, {
         withFileTypes: true,
     });
 
-    const blogs = await Promise.all(
-        blogsPath.map(async (dirent) => {
-            const file = await readFile(path.join(BLOG_PATH, dirent.name));
+    const posts = await Promise.all(
+        postsPath.map(async (dirent) => {
+            const file = await readFile(path.join(POST_PATH, dirent.name));
             const source = file.toString();
             const { attributes }: { attributes: MdxPage["frontmatter"] } =
                 parseFrontMatter(source.toString());
@@ -119,5 +118,5 @@ export async function getBlogs() {
             };
         }),
     );
-    return blogs;
+    return posts;
 }

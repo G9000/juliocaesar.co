@@ -1,11 +1,11 @@
 import { Link, useLoaderData, Outlet } from "@remix-run/react";
 import type { LoaderFunction, LinksFunction } from "@remix-run/node";
-import { getBlogs } from "~/utils/blogs";
-import type { Blog } from "~/utils/blogs";
+import { getPosts } from "~/utils/posts";
+import type { Blog } from "~/utils/posts";
 import styles from "highlight.js/styles/github-dark-dimmed.css";
 
 export const loader: LoaderFunction = async () => {
-    return getBlogs();
+    return getPosts();
 };
 
 export const links: LinksFunction = () => {

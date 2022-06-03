@@ -1,18 +1,18 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { getBlogs } from "~/utils/blogs";
+import { getPosts } from "~/utils/posts";
 import type { MdxPage } from "types";
 import { HeroSectionBg, HeroSection } from "~/components/sections/hero-section";
-import { BlogSection } from "~/components/sections/blogs-section";
+import { PostSection } from "~/components/sections/posts-grid-section";
 import { AboutSection } from "~/components/sections/hero-about-section";
 // import clsx from "clsx";
 
 export const loader: LoaderFunction = async () => {
-    return getBlogs();
+    return getPosts();
 };
 
 export default function Index() {
-    const blogs = useLoaderData<MdxPage[]>();
+    const posts = useLoaderData<MdxPage[]>();
 
     return (
         <div>
@@ -20,8 +20,10 @@ export default function Index() {
                 <HeroSectionBg />
                 <HeroSection />
             </section>
-            <BlogSection blogs={blogs} />
-            <AboutSection />
+            <main>
+                <PostSection posts={posts} title="Featured Posts" subTitle="" />
+                <AboutSection />
+            </main>
         </div>
     );
 }

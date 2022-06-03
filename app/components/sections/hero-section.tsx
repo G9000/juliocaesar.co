@@ -309,7 +309,6 @@ function HeroSectionBg() {
                     "absolute inset-0",
                     "bg-gradient-to-b from-neutral-100 via-[#18181800] to-neutral-100",
                     "dark:bg-gradient-to-b dark:from-neutral-900 dark:via-[#18181800] dark:to-neutral-900",
-                    "transition ease-in-out delay-150 duration-300",
                 )}
             />
             <div
