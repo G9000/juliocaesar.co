@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Theme, useTheme } from "~/providers/theme-provider";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { WalletConnector } from "~/components/wallet/wallet-connector";
 import { Link } from "@remix-run/react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
@@ -7,10 +9,28 @@ import { useMedia } from "react-use";
 import { toast } from "react-hot-toast";
 import clsx from "clsx";
 
+function useWallet() {
+    const [open, setOpen] = React.useState(false);
+    const connectWallet = () => setOpen(true);
+    const closeWallet = () => setOpen(false);
+
+    return {
+        open,
+        connectWallet,
+        connectProps: {
+            "aria-pressed": open,
+            onClick: connectWallet,
+            onClose: closeWallet,
+        },
+    };
+}
+
 export const Layout = ({ children }: { children: React.ReactNode }) => {
     const isMobile = useMedia("(max-width: 848px)", false);
-    let [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [theme, setTheme] = useTheme();
+
+    const { open, connectProps } = useWallet();
 
     const NavLinkStyle =
         "cursor-pointer hover:text-cyan-800 dark:hover:text-cyan-200 transition ease-in-out delay-150 duration-300";
@@ -62,7 +82,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                 <button
                                     onClick={toggleTheme}
                                     className={clsx(
-                                        "flex gap-x-4 text-xl items-center p-4 rounded-lg shadow-lg font-bold",
+                                        "flex items-center gap-x-4 text-xl p-4 rounded-lg shadow-lg font-bold",
                                         "border border-black dark:border-transparent dark:bg-black text-gray-900 dark:text-gray-100 hover:bg-black hover:text-gray-100 dark:hover:bg-cyan-800",
                                         "transition ease-in-out duration-300",
                                     )}
@@ -73,9 +93,18 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                         <HiOutlineMoon />
                                     )}
                                 </button>
+
+                                <WalletConnector
+                                    className={clsx(
+                                        "flex items-center py-4 px-6 border border-black dark:border-transparent leading-none",
+                                        "hover:bg-black dark:bg-black dark:hover:bg-cyan-800 text-gray-900 dark:text-gray-100 hover:text-gray-100",
+                                        "rounded-lg shadow-lg font-bold hover:shadow-xl transition ease-in-out duration-300",
+                                    )}
+                                />
+
                                 <button
                                     className={clsx(
-                                        "flex gap-x-4 items-center py-4 px-6 border border-black dark:border-transparent",
+                                        "flex items-center py-4 px-6 border border-black dark:border-transparent leading-none",
                                         "hover:bg-black dark:bg-black dark:hover:bg-cyan-800 text-gray-900 dark:text-gray-100 hover:text-gray-100",
                                         "rounded-lg shadow-lg font-bold hover:shadow-xl transition ease-in-out duration-300",
                                     )}
@@ -102,7 +131,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                 </button>
                             )}
 
-                            <Dialog
+                            {/* <Dialog
                                 open={isOpen}
                                 onClose={() => setIsOpen(false)}
                                 className="bg-neutral-900 fixed top-[90px] w-full px-4 h-screen"
@@ -135,7 +164,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                         </button>
                                     </ul>
                                 </Dialog.Panel>
-                            </Dialog>
+                            </Dialog> */}
                         </div>
                     )}
                 </nav>

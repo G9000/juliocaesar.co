@@ -10,8 +10,6 @@ import {
     ScrollRestoration,
     useLoaderData,
 } from "@remix-run/react";
-import styles from "./tailwind.css";
-import clsx from "clsx";
 import {
     ThemeProvider,
     useTheme,
@@ -35,6 +33,9 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useEnvironment } from "~/utils/misc";
+import styles from "./tailwind.css";
+import clsx from "clsx";
+// import solanaAdapterStyle from "@solana/wallet-adapter-react-ui/styles.css";
 
 export type LoaderData = {
     theme: Theme | null;
@@ -56,7 +57,10 @@ export const meta: MetaFunction = () => ({
     viewport: "width=device-width,initial-scale=1",
 });
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [
+    // { rel: "stylesheet", href: solanaAdapterStyle },
+    { rel: "stylesheet", href: styles },
+];
 
 function Body() {
     return (
