@@ -52,13 +52,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                     onClick={() => blockUrl()}
                                     className={NavLinkStyle}
                                 >
-                                    Library
-                                </button>
-                                <button
-                                    onClick={() => blockUrl()}
-                                    className={NavLinkStyle}
-                                >
-                                    Weekend Project
+                                    Stuff
                                 </button>
                                 <Link to="/about" className={NavLinkStyle}>
                                     About

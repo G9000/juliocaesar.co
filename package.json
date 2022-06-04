@@ -42,7 +42,17 @@
         "rehype-autolink-headings": "^6.1.1",
         "rehype-highlight": "^5.0.2",
         "rehype-slug": "^5.0.1",
-        "remark-gfm": "^3.0.1"
+        "remark-gfm": "^3.0.1",
+        "@solana/pay": "^0.2.0",
+        "@solana/wallet-adapter-base": "^0.9.4",
+        "@solana/wallet-adapter-react": "^0.15.3",
+        "@solana/wallet-adapter-react-ui": "^0.9.5",
+        "@solana/wallet-adapter-wallets": "^0.16.0",
+        "@solana/web3.js": "^1.36.0",
+        "bignumber.js": "^9.0.2",
+        "crypto-js": "^4.1.1",
+        "ipfs-core": "^0.14.3",
+        "ipfs-http-client": "^56.0.3"
     },
     "devDependencies": {
         "@cld-apis/types": "^0.1.6",

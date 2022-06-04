@@ -26,7 +26,7 @@ export const Grid = React.forwardRef<HTMLElement, GridProps>(function Grid(
         >
             {featured ? (
                 <div className="absolute inset-0 -mx-5vw">
-                    <div className="mx-auto h-full w-full max-w-8xl rounded-lg" />
+                    <div className="mx-auto h-full w-full max-w-8xl" />
                 </div>
             ) : null}
 
@@ -34,7 +34,7 @@ export const Grid = React.forwardRef<HTMLElement, GridProps>(function Grid(
                 className={clsx(
                     "relative grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6",
                     {
-                        "mx-auto max-w-7xl": !nested,
+                        "mx-auto w-full": !nested,
                         "gap-y-24 lg:gap-y-6": rowGap,
                     },
                     className,
