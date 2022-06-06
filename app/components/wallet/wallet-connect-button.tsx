@@ -1,9 +1,9 @@
+import * as React from "react";
+import type { MouseEventHandler } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import type { FC, MouseEventHandler } from "react";
-import React, { useCallback, useMemo } from "react";
 import type { ButtonProps } from "~/components/button";
 import { Button } from "~/components/button";
-import { WalletIcon } from "./~/components/wallet-icon";
+import { WalletIcon } from "~/components/wallet/wallet-icon";
 
 export const WalletConnectButton = ({
     children,
@@ -13,7 +13,7 @@ export const WalletConnectButton = ({
 }: ButtonProps) => {
     const { wallet, connect, connecting, connected } = useWallet();
 
-    const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
+    const handleClick: MouseEventHandler<HTMLButtonElement> = React.useCallback(
         (event) => {
             if (onClick) onClick(event);
             // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -22,7 +22,7 @@ export const WalletConnectButton = ({
         [onClick, connect],
     );
 
-    const content = useMemo(() => {
+    const content = React.useMemo(() => {
         if (children) return children;
         if (connecting) return "Connecting ...";
         if (connected) return "Connected";

@@ -19,7 +19,8 @@ import { getThemeSession } from "~/utils/theme.server";
 import type { Theme } from "~/providers/theme-provider";
 import { Layout } from "./components/layout/Layout";
 import { Toaster } from "react-hot-toast";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+// import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { WalletModalProvider } from "~/providers/wallet-provider";
 import {
     ConnectionProvider,
     WalletProvider,
@@ -33,7 +34,9 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useEnvironment } from "~/utils/misc";
-import styles from "./tailwind.css";
+// import styles from "./tailwind.css";
+// import styles from "./tailwind.css";
+import styles from "./styles/app.css";
 import clsx from "clsx";
 // import solanaAdapterStyle from "@solana/wallet-adapter-react-ui/styles.css";
 
@@ -57,10 +60,7 @@ export const meta: MetaFunction = () => ({
     viewport: "width=device-width,initial-scale=1",
 });
 
-export const links: LinksFunction = () => [
-    // { rel: "stylesheet", href: solanaAdapterStyle },
-    { rel: "stylesheet", href: styles },
-];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 function Body() {
     return (

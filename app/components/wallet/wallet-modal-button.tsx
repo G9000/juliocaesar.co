@@ -3,11 +3,11 @@ import { Button } from "~/components/button";
 import type { ButtonProps } from "~/components/button";
 import { useWalletModal } from "~/hooks/useWalletModal";
 
-export const WalletModalButton = ({
+export function WalletModalButton({
     children = "Select Wallet",
     onClick,
     ...props
-}: ButtonProps) => {
+}: ButtonProps) {
     const { visible, setVisible } = useWalletModal();
 
     const handleClick = React.useCallback(
@@ -28,4 +28,4 @@ export const WalletModalButton = ({
             {children}
         </Button>
     );
-};
+}

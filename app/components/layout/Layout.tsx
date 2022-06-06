@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Theme, useTheme } from "~/providers/theme-provider";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { WalletConnector } from "~/components/wallet/wallet-connector";
 import { Link } from "@remix-run/react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
 import { useMedia } from "react-use";
 import { toast } from "react-hot-toast";
+import { Button, IconButton } from "~/components/button";
 import clsx from "clsx";
 
 function useWallet() {
@@ -55,7 +55,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <body className="flex w-full bg-neutral-100 dark:bg-neutral-900 transition ease-in-out delay-150 duration-300 relative font-basicSans">
             <div className="w-full min-h-screen h-full flex flex-col">
                 <div className="hidden md:block bg-cyan-200 bg-opacity-5 border-b border-cyan-500 sticky top-0 z-50" />
-                <nav className="flex justify-between items-center max-w-[1840px] w-full mx-auto h-[90px] my-6 z-50 px-[5vw]">
+                <nav className="flex justify-between items-center max-w-[1840px] w-full mx-auto my-6 z-50 px-[5vw]">
                     {!isMobile ? (
                         <>
                             <ul className="text-gray-900 dark:text-gray-100 flex gap-x-8 text-xl font-semibold">
@@ -78,8 +78,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                     About
                                 </Link>
                             </ul>
-                            <div className="flex gap-x-4">
-                                <button
+                            <div className="inline-flex gap-x-4">
+                                {/* <button
                                     onClick={toggleTheme}
                                     className={clsx(
                                         "flex items-center gap-x-4 text-xl p-4 rounded-lg shadow-lg font-bold",
@@ -92,25 +92,17 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                     ) : (
                                         <HiOutlineMoon />
                                     )}
-                                </button>
-
-                                <WalletConnector
-                                    className={clsx(
-                                        "flex items-center py-4 px-6 border border-black dark:border-transparent leading-none",
-                                        "hover:bg-black dark:bg-black dark:hover:bg-cyan-800 text-gray-900 dark:text-gray-100 hover:text-gray-100",
-                                        "rounded-lg shadow-lg font-bold hover:shadow-xl transition ease-in-out duration-300",
+                                </button> */}
+                                <IconButton size="medium" onClick={toggleTheme}>
+                                    {theme === "light" ? (
+                                        <HiOutlineSun />
+                                    ) : (
+                                        <HiOutlineMoon />
                                     )}
-                                />
+                                </IconButton>
+                                <Button size="medium">Let's have a chat</Button>
 
-                                <button
-                                    className={clsx(
-                                        "flex items-center py-4 px-6 border border-black dark:border-transparent leading-none",
-                                        "hover:bg-black dark:bg-black dark:hover:bg-cyan-800 text-gray-900 dark:text-gray-100 hover:text-gray-100",
-                                        "rounded-lg shadow-lg font-bold hover:shadow-xl transition ease-in-out duration-300",
-                                    )}
-                                >
-                                    Let's have a chat
-                                </button>
+                                {/* <WalletConnector /> */}
                             </div>
                         </>
                     ) : (

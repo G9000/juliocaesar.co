@@ -1,5 +1,5 @@
-import type { Wallet } from "@solana/wallet-adapter-react";
 import * as React from "react";
+import type { Wallet } from "@solana/wallet-adapter-react";
 
 export interface WalletIconProps
     extends React.DetailedHTMLProps<
@@ -9,7 +9,7 @@ export interface WalletIconProps
     wallet: Wallet | null;
 }
 
-export const WalletIcon = ({ wallet, ...props }: WalletIconProps) => {
+export function WalletIcon({ wallet, ...props }: WalletIconProps) {
     return (
         wallet && (
             <img
@@ -19,4 +19,4 @@ export const WalletIcon = ({ wallet, ...props }: WalletIconProps) => {
             />
         )
     );
-};
+}

@@ -1,11 +1,14 @@
-import { useWallet } from "@solana/wallet-adapter-react";
 import * as React from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import type { ButtonProps } from "~/components/button";
 import { Button } from "~/components/button";
-import { useWalletModal } from "~/components/wallet/wallet-modal";
+import { useWalletModal } from "~/hooks/useWalletModal";
 import { WalletConnectButton } from "~/components/wallet/wallet-connect-button";
 import { WalletIcon } from "~/components/wallet/wallet-icon";
 import { WalletModalButton } from "~/components/wallet/wallet-modal-button";
+
+// Taken directly from https://github.com/solana-labs/wallet-adapter but their predefined css
+// make it hard to fully customize with tailwind even overidding them
 
 export function WalletConnector({ children, ...props }: ButtonProps) {
     const { publicKey, wallet, disconnect } = useWallet();

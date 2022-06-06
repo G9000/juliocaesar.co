@@ -4,3 +4,4 @@ coverage
 tailwind.config.js
 remix.config.js
 commitlint.config.js
+postcss.config.js
