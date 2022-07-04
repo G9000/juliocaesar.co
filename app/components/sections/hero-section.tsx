@@ -18,7 +18,7 @@ function HeroSection() {
         <div className="flex py-[10vh] md:py-[15vh] max-w-[1620px] items-center w-full mx-auto relative">
             <div className="w-full xl:w-2/3 px-[5vw] md:px-20">
                 <span className="text-gray-600 dark:text-gray-200">
-                    🚧 Still under active development. Updated 6/3/2022 🚧
+                    🚧 Still under active development. Updated 6/3/2022. On Holiday till September 🚧
                 </span>
                 <h1 className="leading-relaxed text-3xl md:text-4xl md:leading-relaxed font-semibold text-black dark:text-gray-100 mt-4">
                     Helping clients to build delightful digital landmarks on the
