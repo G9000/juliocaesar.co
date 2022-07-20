@@ -81,10 +81,9 @@
         "typescript": "^4.6.4"
     },
     "lint-staged": {
-        "*.{css,json,jsx,js,tsx,ts}": [
-            "prettier --write ."
-        ],
-        "*.{js, ts}": "eslint --fix"
+        "*.{ts,tsx,js}": [
+            "eslint --fix"
+        ]
     },
     "engines": {
         "node": ">=14"
