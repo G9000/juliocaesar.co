@@ -19,26 +19,8 @@ import { getThemeSession } from "~/utils/theme.server";
 import type { Theme } from "~/providers/theme-provider";
 import { Layout } from "./components/layout/Layout";
 import { Toaster } from "react-hot-toast";
-// import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { WalletModalProvider } from "~/providers/wallet-provider";
-import {
-    ConnectionProvider,
-    WalletProvider,
-} from "@solana/wallet-adapter-react";
-import {
-    GlowWalletAdapter,
-    PhantomWalletAdapter,
-    SlopeWalletAdapter,
-    SolflareWalletAdapter,
-    TorusWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
-import { clusterApiUrl } from "@solana/web3.js";
-import { useEnvironment } from "~/utils/misc";
-// import styles from "./tailwind.css";
-// import styles from "./tailwind.css";
 import styles from "./styles/app.css";
 import clsx from "clsx";
-// import solanaAdapterStyle from "@solana/wallet-adapter-react-ui/styles.css";
 
 export type LoaderData = {
     theme: Theme | null;
@@ -74,31 +56,6 @@ function Body() {
     );
 }
 
-function AppWithSolanaProvider() {
-    const network = useEnvironment.solanaNetwork;
-    const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
-    const wallets = React.useMemo(
-        () => [
-            new PhantomWalletAdapter(),
-            new GlowWalletAdapter(),
-            new SlopeWalletAdapter(),
-            new SolflareWalletAdapter({ network }),
-            new TorusWalletAdapter(),
-        ],
-        [network],
-    );
-
-    return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
-                    <Body />
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
-    );
-}
-
 function App() {
     const data = useLoaderData<LoaderData>();
     const [theme] = useTheme();
@@ -110,7 +67,7 @@ function App() {
                 <NonFlashOfWrongThemeEls ssrTheme={Boolean(data.theme)} />
             </head>
 
-            <AppWithSolanaProvider />
+            <Body />
         </html>
     );
 }

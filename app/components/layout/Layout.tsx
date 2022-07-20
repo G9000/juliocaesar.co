@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Theme, useTheme } from "~/providers/theme-provider";
-import { WalletConnector } from "~/components/wallet/wallet-connector";
 import { Link } from "@remix-run/react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
@@ -9,28 +8,10 @@ import { toast } from "react-hot-toast";
 import { Button, IconButton } from "~/components/button";
 import clsx from "clsx";
 
-function useWallet() {
-    const [open, setOpen] = React.useState(false);
-    const connectWallet = () => setOpen(true);
-    const closeWallet = () => setOpen(false);
-
-    return {
-        open,
-        connectWallet,
-        connectProps: {
-            "aria-pressed": open,
-            onClick: connectWallet,
-            onClose: closeWallet,
-        },
-    };
-}
-
 export const Layout = ({ children }: { children: React.ReactNode }) => {
     const isMobile = useMedia("(max-width: 848px)", false);
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [theme, setTheme] = useTheme();
-
-    const { open, connectProps } = useWallet();
 
     const NavLinkStyle =
         "cursor-pointer hover:text-cyan-800 dark:hover:text-cyan-200 transition ease-in-out delay-150 duration-300";
@@ -101,8 +82,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                                     )}
                                 </IconButton>
                                 <Button size="medium">Let's have a chat</Button>
-
-                                {/* <WalletConnector /> */}
                             </div>
                         </>
                     ) : (
